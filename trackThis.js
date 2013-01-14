@@ -1,6 +1,6 @@
 //trackThis.js
 //http://github.com/jonathanhaslett/trackThis.js
-function initTrackThis(){
+function trackThis(){
 	//START <a> selector.
 	$('a:not([href^="tel:"]).trackThis').each(function(){
 		$(this).click(function(){
@@ -20,14 +20,14 @@ function initTrackThis(){
 			$(this).click(function(){
 				var arguments = $(this).attr('data-trackThis').split(',');
 				if($(this).hasClass('clicked')){
-					_gaq.push(['_trackEvent', arguments[0], arguments[1], 'Clicked', parseInt(arguments[3])]);		
+					_gaq.push(['_trackEvent', arguments[0], 'Clicked', arguments[2], 0]);		
 					_gaq.push(function(){
 						return true;
 					});
 				}else{
 					$(this).addClass('clicked');
 					$(this).html(phoneNumber);
-					_gaq.push(['_trackEvent', arguments[0], arguments[1], 'Revealed', 0]);		
+					_gaq.push(['_trackEvent', arguments[0], 'Revealed', arguments[2], parseInt(arguments[3])]);		
 					return false;
 				}
 			});

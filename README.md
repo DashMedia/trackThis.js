@@ -2,6 +2,8 @@
 
 Simple Javascript/jQuery script for tracking events in Google Analytics based on a HTML class and data attributes.
 
+You can try the live demo at http://dev.jon.haslett.id.au/trackthis/
+
 ##Setting Up
 
 ### 1. Use Google Analytics Async Tracking Code
@@ -35,6 +37,12 @@ Example of the "data-trackThis" attribute.
 Example of the "class" attribute.
 
 	class="trackThis"
+	
+### 4. Make it so
+
+Init the script from your main *.js file after the document has loaded.
+
+	trackThis();
 
 ##Supported Tags
 

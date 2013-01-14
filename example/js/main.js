@@ -1,6 +1,6 @@
 //do when the document is ready
 $(document).ready(function() {
     		    		
-    initTrackThis();
+    trackThis();
 
 }); //END do when the document is ready
