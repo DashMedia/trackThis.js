@@ -22,7 +22,6 @@ function initTrackThis(){
 				if($(this).hasClass('clicked')){
 					_gaq.push(['_trackEvent', arguments[0], arguments[1], 'Clicked', parseInt(arguments[3])]);		
 					_gaq.push(function(){
-						alert('go');
 						return true;
 					});
 				}else{
