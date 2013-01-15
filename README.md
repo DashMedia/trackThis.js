@@ -1,8 +1,18 @@
 #trackThis.js
 
-Simple Javascript/jQuery script for tracking events in Google Analytics based on a HTML class and data attributes.
+Simple Javascript/jQuery script for tracking client side events in Google Analytics based on a HTML class and data attributes.
 
 You can try the live demo at http://dev.jon.haslett.id.au/trackthis/
+
+##Usage Examples
+
+###Email Address Links
+
+###Telephone Numbers
+
+###External Site Links
+
+###Links that activate 'Lightbox' style content.
 
 ##Setting Up
 
@@ -60,9 +70,11 @@ Adds onClick event just like \<a> above except that on .no-touch it hides the la
 	
 	<a href="tel:+61406650430" class="trackThis" data-trackThis="category,action,label,value(int)">tel:+61406650430</a>.
 	
-### \<input type="submit"> Tags
+##Possible Future Tags
 
-**I'm still testing this one.**
+These are features I'm considering implementing in the future.
+	
+### \<input type="submit"> Tags
 
 Adds onSubmit event, records the analytics info the returns true.
 	
