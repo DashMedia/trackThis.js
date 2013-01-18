@@ -13,7 +13,7 @@ trackThis.js targets the following elements:
 	
 The equivalent google analytics call:
 
-	_gaq.push(['_trackEvent', 'Phone Number', 'Opened', '+61406650430']);
+	_gaq.push(['_trackEvent', 'Phone Number', 'Dialed', '+61406650430']);
 		
 ###Email Addresses	
 
@@ -21,7 +21,7 @@ The equivalent google analytics call:
 	
 The equivalent google analytics call:
 
-	_gaq.push(['_trackEvent', 'Email Address', 'Opened', 'trackThis@dashmedia.com.au']);
+	_gaq.push(['_trackEvent', 'Email Address', 'Clicked', 'trackThis@dashmedia.com.au']);
 	
 ###Intrapage Links
 
