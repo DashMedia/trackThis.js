@@ -2,7 +2,25 @@
 
 Simple Javascript/jQuery script for turbo charging Google Analytics by tracking a variety of page events that aren't tracked by default.
 
-You can try the live demo at http://dev.jon.haslett.id.au/trackthis/
+##Initialisation Args
+
+You can optionally pass the following args:
+
+- UACode (Optional)
+	- This is your Google Analytics Tracking Code, if you do not have a async Google Analytics snippit present in your page you can provide your code here and trackThis will implement one.
+	- If no code is provided, trackThis assumes the Google ANanlytics async code has been implemented
+- fileExt (Optional)
+	- adds file extensions to the list of file extensions to be checked by trackThis, the defaults are: pdf, zip, dmg
+	- value must be comma seperated string WITHOUT '.'
+- Examples Args
+
+		$(document).ready(function(){
+	            $(this).trackThis({
+	                fileExt: "docx, 7z",
+	                UACode: "UA-XXXXXXX-XX"
+	            });
+	        });
+	
 
 ##Target Elements
 
@@ -53,28 +71,22 @@ The equivalent google analytics call:
 	_gaq.push(['_trackEvent', 'File', 'Downloaded', '/path-to/file.pdf']);
 
 ##Setting Up
-
-### 1. Use Google Analytics Async Tracking Code
-
-Something like…
-	
-	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-    <script type="text/javascript">
-		var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', 'UA-XXXXX-X']);
-		_gaq.push(['_trackPageview']);
-		(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
 		
-If you have old Google Analytics code you might need to update it.
-		
-### 2. Add trackThis.js
+### 1. Add trackThis.js
 
 Use the minified version for production and include it with your other *.js files to reduce the number of http requests.
+
+Alternatively you can include it in the head, **after jQuery and your Google Async Tracking** (if you are not useing the optional UACode variable) but **before your script**
+
+### 2. Initialise trackThis
+
+Inside your .js file initialise trackThis on the parent element you wish to track from, for most situations the *document* object will be perfect
+
+	$(document).ready(function(){
+		$(this).trackThis({
+			//optional args
+		});
+	});
 
 ### 3. There is no step 3
 
