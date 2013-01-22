@@ -30,6 +30,27 @@ The equivalent google analytics call:
 The equivalent google analytics call:
 	
 	gaq.push(['_trackPageview', '/page-url/#anchor']);
+	
+### External Links
+
+jQuery selector:
+
+	a[href*='://']:not([href*='"+location.hostname.replace
+           ("www.","")+"'])
+	
+The equivalent google analytics call:
+
+	_gaq.push(['_trackEvent', 'External Link', 'Opened', 'http://google.com/']);
+
+Also forces external links to open in a new window by changing the target attribute to "_blank".
+
+### File Download Links
+
+	a[href$=".pdf"],a[href$=".zip"],a[href$=".dmg"]
+	
+The equivalent google analytics call:
+
+	_gaq.push(['_trackEvent', 'File', 'Downloaded', '/path-to/file.pdf']);
 
 ##Setting Up
 
