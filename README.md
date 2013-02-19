@@ -6,6 +6,9 @@ Simple Javascript/jQuery script for turbo charging Google Analytics by tracking 
 
 You can optionally pass the following args:
 
+- AltUA
+	- Alternate Google Tracking code, will only track **default analytics data** additional trackThis() data not tracked
+	- You may provide a default AltUA code within the trackThis.js file to use as a fallback
 - UACode (Optional)
 	- This is your Google Analytics Tracking Code, if you do not have a async Google Analytics snippit present in your page you can provide your code here and trackThis will implement one.
 	- If no code is provided, trackThis assumes the Google ANanlytics async code has been implemented
@@ -16,8 +19,9 @@ You can optionally pass the following args:
 
 		$(document).ready(function(){
 	            $(this).trackThis({
-	                fileExt: "docx, 7z",
-	                UACode: "UA-XXXXXXX-XX"
+	                fileExt: 	"docx, 7z",
+	                UACode: 	"UA-XXXXXXX-01",
+	                AltUA:		"UA-XXXXXXX-02"
 	            });
 	        });
 	
@@ -77,6 +81,15 @@ The equivalent google analytics call:
 Use the minified version for production and include it with your other *.js files to reduce the number of http requests.
 
 Alternatively you can include it in the head, **after jQuery and your Google Async Tracking** (if you are not useing the optional UACode variable) but **before your script**
+
+You may define default values for trackThis() within the trackThis.js file
+	
+	//If you define here, you do not need to define them at initialisation
+	settings = jQuery.extend({
+			fileExt: 		"7z, docx",
+			UACode: 		"UA-XXXXXXX-01",
+			AltUA: 			"UA-XXXXXXX-02"
+			}, settings);
 
 ### 2. Initialise trackThis
 
