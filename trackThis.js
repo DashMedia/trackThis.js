@@ -30,7 +30,7 @@
 					window.hasAlt = true;
 				}
 				catch(err){
-					console.log("error: " + err);
+/* 					console.log("error: " + err); */
 				}
 			}
 
@@ -97,7 +97,7 @@
 
 			//combine reduce array into single string for searching
 			userExt = userExt.join(",");
-			console.log(userExt);
+/* 			console.log(userExt); */
 			// userExt = userExt.substr(0,userExt.length - 1);
 
 			//File downloads, add additional file types if you want. also turns the link into target="_blank" rel="external".
