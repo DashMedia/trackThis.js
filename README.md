@@ -7,6 +7,7 @@ Simple Javascript/jQuery script for turbo charging Google Analytics by tracking 
 You can optionally pass the following args:
 
 - AltUA
+  - Used to track your site in a second GA account, usually to track aggregate data between multiple sites 
 	- Alternate Google Tracking code, will only track **default analytics data** additional trackThis() data not tracked
 	- You may provide a default AltUA code within the trackThis.js file to use as a fallback
 - UACode (Optional)
