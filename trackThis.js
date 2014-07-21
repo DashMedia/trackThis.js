@@ -8,7 +8,6 @@
 	 			AltUA: "UA-16630497-44" //Default AltUA code (will be used if none provided)
 	 		}, settings);
 		var init = function() {
-
 	 				//Add async code
 	 				if (settings.UACode) {
 	 					(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -27,15 +26,24 @@
 
 	 				//Telephone numbers such as autoformated tel: links on mobile devices.
 	 				$('a[href^="tel:"]').on("click", function(event) {
+	 					event.preventDefault();
 	 					var theLabel = $(this).attr('href');
-	 					ga('send','event','Telephone','Clicked',theLabel);
+	 					ga('send','event','Telephone','Clicked',theLabel, {
+	 						'hitCallback' : function() {
+	 							window.location.href = theLabel;
+	 						}
+	 					});
 	 				});
 
 	 				//Email links that open the default mail client.
 	 				$('a[href^="mailto:"]').on("click", function(event) {
+	 					event.preventDefault();
 	 					var theLabel = $(this).attr('href');
-	 					console.log(theLabel);
-	 					ga('send', 'event', 'Email', 'Clicked', theLabel);
+	 					ga('send', 'event', 'Email', 'Clicked', theLabel, {
+	 						'hitCallback' : function() {
+	 							window.location.href = theLabel;
+	 						}
+	 					});
 	 				});
 
 	 				//Intrapage links/anchors that jump down the page or trigger some javascript action.
