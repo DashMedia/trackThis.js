@@ -1,13 +1,15 @@
 //trackThis.js
 //http://github.com/DashMedia/trackThis.js/
-(function($) {
-	$.fn.trackThis = function(settings) {
-		settings = jQuery.extend({
-			fileExt: "",
-			UACode: "",
-	 			AltUA: "UA-16630497-44" //Default AltUA code (will be used if none provided)
-	 		}, settings);
+(function(root) {
+let trackThis = function(settings) {
+
+	let defaults = {fileExt:"",
+	UACode: "",
+		AltUA: "UA-16630497-44"} //default AltUA code
+
+		settings = Object.assign({},defaults);
 		var init = function() {
+			console.console.log('test');
 	 				//Add async code
 	 				if (settings.UACode) {
 	 					(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -25,9 +27,10 @@
 	 				}
 
 	 				//Telephone numbers such as autoformated tel: links on mobile devices.
-	 				$('a[href^="tel:"]').on("click", function(event) {
+	 				let tel_links = document.querySelectorAll('a[href^="tel:"]');
+	 				tel_links.on("click", function(event) {
 	 					event.preventDefault();
-	 					var theLabel = $(this).attr('href');
+	 					var theLabel = telLinks.attr('href');
 	 					ga('send','event','Telephone','Clicked',theLabel, {
 	 						'hitCallback' : function() {
 	 							window.location.href = theLabel;
@@ -36,7 +39,8 @@
 	 				});
 
 	 				//Email links that open the default mail client.
-	 				$('a[href^="mailto:"]').on("click", function(event) {
+	 				let mail_links = document.querySelectorAll('a[href^="mailto:"]');
+	 				mail_links.on("click", function(event) {
 	 					event.preventDefault();
 	 					var theLabel = $(this).attr('href');
 	 					ga('send', 'event', 'Email', 'Clicked', theLabel, {
@@ -47,6 +51,7 @@
 	 				});
 
 	 				//Intrapage links/anchors that jump down the page or trigger some javascript action.
+	 				let path_links = document.querySelectorAll('a[href^="#"]');
 	 				$('a[href^="#"]').on("click", function(event) {
 	 					var theLabel = $(this).attr('href');
 	 					ga('send', 'pageview', {
@@ -64,7 +69,8 @@
 	 					ga('send', 'event', 'External Link', 'Clicked', theLabel);
 	 				});
 
-	 				$('a[data-trackthis]').on("click", function(event){
+					let link_data_track = document.querySelectorAll('a[data-trackthis]');
+	 				link_data_track.on("click", function(event){
 	 					var theLabel = $(this).attr('href');
 	 					var match = theLabel.match(/^([^:\/?#]+:)?(?:\/\/([^\/?#]*))?([^?#]+)?(\?[^#]*)?(#.*)?/);
 	 					var isExt = (typeof match[1] === "string" && match[1].length > 0 && match[1].toLowerCase() !== location.protocol);
@@ -86,9 +92,13 @@
 	 				userExt = trackExt.concat(userExt);
 
 	 				//add jQuery selecters to each ext
-	 				$.each(userExt, function(i, data) {
-	 					userExt[i] = 'a[href$=".' + $.trim(data) + '"]';
-	 				});
+					// 	$.each(userExt, function(i, data) {
+	 			// 		userExt[i] = 'a[href$=".' + $.trim(data) + '"]';
+					// 	});
+
+					for (let i = 0; i < userExt.length; i++) {
+						userExt[i] = 'a[href$=".' + $.trim(data) + '"]';
+					}
 
 	 				//combine reduce array into single string for searching
 	 				userExt = userExt.join(","); /*			console.log(userExt); */
@@ -107,5 +117,5 @@
 	 			}
 	 			init();
 	 		}
-	 	})(jQuery);
+	 	})();
 //END TrackThis();
