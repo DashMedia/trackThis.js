@@ -7,7 +7,7 @@ Simple Javascript/jQuery script for turbo charging Google Analytics by tracking 
 You can optionally pass the following args:
 
 - AltUA
-  - Used to track your site in a second GA account, usually to track aggregate data between multiple sites 
+  - Used to track your site in a second GA account, usually to track aggregate data between multiple sites
 	- Alternate Google Tracking code, will only track **default analytics data** additional trackThis() data not tracked
 	- You may provide a default AltUA code within the trackThis.js file to use as a fallback
 - UACode (Optional)
@@ -17,50 +17,47 @@ You can optionally pass the following args:
 	- adds file extensions to the list of file extensions to be checked by trackThis, the defaults are: pdf, zip, dmg
 	- value must be comma seperated string WITHOUT '.'
 - Examples Args
+remove export default from the trackThis.js and use the following code:
 
-		$(document).ready(function(){
-	            $(this).trackThis({
-	                fileExt: 	"docx, 7z",
-	                UACode: 	"UA-XXXXXXX-01",
-	                AltUA:		"UA-XXXXXXX-02"
-	            });
-	        });
-	
+document.addEventListener('DOMContentLoaded', function() {
+let tt = new trackThis({fileExt: "docx, 7z"});
+});
+
 
 ##Target Elements
 
 trackThis.js targets the following elements:
 
-###Telephone Numbers	
+###Telephone Numbers
 	a[href^="tel:"]
-	
+
 The equivalent google analytics call:
 
 	_gaq.push(['_trackEvent', 'Phone Number', 'Dialed', '+61406650430']);
-		
-###Email Addresses	
+
+###Email Addresses
 
 	a[href^="mailto:"]
-	
+
 The equivalent google analytics call:
 
 	_gaq.push(['_trackEvent', 'Email Address', 'Clicked', 'trackThis@dashmedia.com.au']);
-	
+
 ###Intrapage Links
 
 	a[href^="#"]
-	
+
 The equivalent google analytics call:
-	
+
 	gaq.push(['_trackPageview', '/page-url/#anchor']);
-	
+
 ### External Links
 
 jQuery selector:
 
 	a[href*='://']:not([href*='"+location.hostname.replace
            ("www.","")+"'])
-	
+
 The equivalent google analytics call:
 
 	_gaq.push(['_trackEvent', 'External Link', 'Opened', 'http://google.com/']);
@@ -70,13 +67,13 @@ Also forces external links to open in a new window by changing the target attrib
 ### File Download Links
 
 	a[href$=".pdf"],a[href$=".zip"],a[href$=".dmg"]
-	
+
 The equivalent google analytics call:
 
 	_gaq.push(['_trackEvent', 'File', 'Downloaded', '/path-to/file.pdf']);
 
 ##Setting Up
-		
+
 ### 1. Add trackThis.js
 
 Use the minified version for production and include it with your other *.js files to reduce the number of http requests.
@@ -84,23 +81,22 @@ Use the minified version for production and include it with your other *.js file
 Alternatively you can include it in the head, **after jQuery and your Google Async Tracking** (if you are not useing the optional UACode variable) but **before your script**
 
 You may define default values for trackThis() within the trackThis.js file
-	
+
 	//If you define here, you do not need to define them at initialisation
-	settings = jQuery.extend({
-			fileExt: 		"7z, docx",
-			UACode: 		"UA-XXXXXXX-01",
-			AltUA: 			"UA-XXXXXXX-02"
-			}, settings);
+  let defaults = {
+    fileExt: "",
+    UACode: "",
+    AltUA: "UA-16630497-44" //default AltUA code
+  };
+  	settings = Object.assign(defaults, settings);
 
 ### 2. Initialise trackThis
 
 Inside your .js file initialise trackThis on the parent element you wish to track from, for most situations the *document* object will be perfect
 
-	$(document).ready(function(){
-		$(this).trackThis({
-			//optional args
-		});
-	});
+document.addEventListener('DOMContentLoaded', function() {
+let tt = new trackThis({fileExt: "docx, 7z"});
+});
 
 ### 3. There is no step 3
 
