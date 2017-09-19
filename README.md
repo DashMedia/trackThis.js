@@ -52,6 +52,8 @@ ga('require', 'trackThisFileDownload');
 
 ## Additional options
 
+All examples provided below are the default values
+
 ### trackThisFileDownload
 
 We can define which file extensions to track
