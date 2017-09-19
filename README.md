@@ -22,11 +22,11 @@ You can simply include the `dist/trackThis.js` file in your page, after your Goo
 Install from npm (using the `[githubUsername]/[project]` format)
 
 ```batch
-npm install --save-dev DashMedia/trackThis.js
+npm install trackThis.js
 ```
 
 ```Javascript
-import 'trackThis.js';
+import 'trackthis.js';
 
 ga('require', 'trackThisIntraPageLink');
 ga('require', 'trackThisLinkProtocol');
@@ -37,7 +37,7 @@ ga('require', 'trackThisOpenExternalInTab');
 Or, just include the plugins you're interested in
 
 ```Javascript
-import 'trackThis.js/src/plugins/TrackThisFileDownload';
+import 'trackthis.js/src/plugins/TrackThisFileDownload';
 
 ga('require', 'trackThisFileDownload');
 ```
@@ -59,7 +59,7 @@ All examples provided below are the default values
 We can define which file extensions to track
 
 ```Javascript
-import 'trackThis.js';
+import 'trackthis.js';
 
 const options = {
   extensions: ['pdf', 'zip', '7zip', 'doc', 'docx']
@@ -73,7 +73,7 @@ ga('require', 'trackThisFileDownload', options);
 Each protocol requires a `category` which is passed to Google Analytics as the `eventCategory`
 
 ```Javascript
-import 'trackThis.js';
+import 'trackthis.js';
 
 const options = {
   protocols: {

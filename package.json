@@ -1,5 +1,5 @@
 {
-  "name": "trackthis",
+  "name": "trackthis.js",
   "version": "1.0.0",
   "description": "Add automatic event and pageview tracking for google analytics for common link types",
   "main": "src",
