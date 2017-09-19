@@ -1,103 +1,88 @@
-#trackThis.js
+# trackThis.js
 
-Simple Javascript/jQuery script for turbo charging Google Analytics by tracking a variety of page events that aren't tracked by default.
+Simple tracking plugins for Google Analytics inspired by (googleanalytics/autotrack)[<https://github.com/googleanalytics/autotrack>]
 
-##Initialisation Args
+trackThis.js assumes you're using universal analytics and have included it in your project as per Google's instructions
 
-You can optionally pass the following args:
+## Plugins
 
-- AltUA
-  - Used to track your site in a second GA account, usually to track aggregate data between multiple sites
-	- Alternate Google Tracking code, will only track **default analytics data** additional trackThis() data not tracked
-	- You may provide a default AltUA code within the trackThis.js file to use as a fallback
-- UACode (Optional)
-	- This is your Google Analytics Tracking Code, if you do not have a async Google Analytics snippit present in your page you can provide your code here and trackThis will implement one.
-	- If no code is provided, trackThis assumes the Google ANanlytics async code has been implemented
-- fileExt (Optional)
-	- adds file extensions to the list of file extensions to be checked by trackThis, the defaults are: pdf, zip, dmg
-	- value must be comma seperated string WITHOUT '.'
-- Examples Args
-remove export default from the trackThis.js and use the following code:
+Plugin                       | Description                                                                   | Default
+---------------------------- | ----------------------------------------------------------------------------- | -------------------------
+`trackThisIntraPageLink`     | Automatically track links which change the current page hash                  |
+`trackThisLinkProtocol`      | Track links matching the given protocol                                       | mailto, tel
+`trackThisFileDownload`      | Track file download links                                                     | pdf, zip, 7zip, doc, docx
+`trackThisOpenExternalInTab` | Helper function to open all links pointing to a different domain in a new tab
 
-document.addEventListener('DOMContentLoaded', function() {
-let tt = new trackThis({fileExt: "docx, 7z"});
-});
+## Installation
+
+You can simply include the `dist/trackThis.js` file in your page, after your Google Analytics code if you like.
+
+### Webpack, Browserify, etc...
+
+Install from npm (using the `[githubUsername]/[project]` format)
+
+```batch
+npm install --save-dev DashMedia/trackThis.js
+```
+
+```Javascript
+import 'trackThis.js';
+
+ga('require', 'trackThisIntraPageLink');
+ga('require', 'trackThisLinkProtocol');
+ga('require', 'trackThisFileDownload');
+ga('require', 'trackThisOpenExternalInTab');
+```
+
+Or, just include the plugins you're interested in
+
+```Javascript
+import 'trackThis.js/src/plugins/TrackThisFileDownload';
+
+ga('require', 'trackThisFileDownload');
+```
+
+## Setting Up
+
+- Add universal analytics to your project
+- Include trackThis.js
+- Enable trackThis plugins via `ga('require', [pluginName])`
+- Enjoy extra data directly to your analytics account
 
 
-##Target Elements
+## Additional options
 
-trackThis.js targets the following elements:
+### trackThisFileDownload
 
-###Telephone Numbers
-	a[href^="tel:"]
+We can define which file extensions to track
 
-The equivalent google analytics call:
+```Javascript
+import 'trackThis.js';
 
-	_gaq.push(['_trackEvent', 'Phone Number', 'Dialed', '+61406650430']);
+const options = {
+  extensions: ['pdf', 'zip', '7zip', 'doc', 'docx']
+};
 
-###Email Addresses
+ga('require', 'trackThisFileDownload', options);
+```
 
-	a[href^="mailto:"]
+### TrackThisLinkProtocol
 
-The equivalent google analytics call:
+Each protocol requires a `category` which is passed to Google Analytics as the `eventCategory`
 
-	_gaq.push(['_trackEvent', 'Email Address', 'Clicked', 'trackThis@dashmedia.com.au']);
+```Javascript
+import 'trackThis.js';
 
-###Intrapage Links
+const options = {
+  protocols: {
+    'mailto:': {
+      category: 'Mail send'
+    },
+    'tel:': {
+      category: 'Phone number'
+    }
+  }
+};
 
-	a[href^="#"]
-
-The equivalent google analytics call:
-
-	gaq.push(['_trackPageview', '/page-url/#anchor']);
-
-### External Links
-
-jQuery selector:
-
-	a[href*='://']:not([href*='"+location.hostname.replace
-           ("www.","")+"'])
-
-The equivalent google analytics call:
-
-	_gaq.push(['_trackEvent', 'External Link', 'Opened', 'http://google.com/']);
-
-Also forces external links to open in a new window by changing the target attribute to "_blank".
-
-### File Download Links
-
-	a[href$=".pdf"],a[href$=".zip"],a[href$=".dmg"]
-
-The equivalent google analytics call:
-
-	_gaq.push(['_trackEvent', 'File', 'Downloaded', '/path-to/file.pdf']);
-
-##Setting Up
-
-### 1. Add trackThis.js
-
-Use the minified version for production and include it with your other *.js files to reduce the number of http requests.
-
-Alternatively you can include it in the head, **after jQuery and your Google Async Tracking** (if you are not useing the optional UACode variable) but **before your script**
-
-You may define default values for trackThis() within the trackThis.js file
-
-	//If you define here, you do not need to define them at initialisation
-  let defaults = {
-    fileExt: "",
-    UACode: "",
-    AltUA: "UA-16630497-44" //default AltUA code
-  };
-  	settings = Object.assign(defaults, settings);
-
-### 2. Initialise trackThis
-
-Inside your .js file initialise trackThis on the parent element you wish to track from, for most situations the *document* object will be perfect
-
-document.addEventListener('DOMContentLoaded', function() {
-let tt = new trackThis({fileExt: "docx, 7z"});
-});
-
-### 3. There is no step 3
-
-That's it, you're done.
+ga('require', 'trackThisLinkProtocol', options);
+```
