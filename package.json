@@ -1,6 +1,6 @@
 {
   "name": "@dashmedia/trackthis",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Add automatic event and pageview tracking for google analytics for common link types",
   "main": "src",
   "scripts": {
