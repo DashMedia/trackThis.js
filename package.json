@@ -2,7 +2,7 @@
   "name": "@dashmedia/trackthis",
   "version": "1.0.1",
   "description": "Add automatic event and pageview tracking for google analytics for common link types",
-  "main": "src",
+  "main": "dist/trackThis.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "./node_modules/.bin/webpack; ./node_modules/.bin/webpack ./example/js/test.js ./example/js/test.bundle.js"
